@@ -28,7 +28,7 @@ app.post('/notification/order', function (req, res) {
   var jsonBody = req.body;
   
   transporter.sendMail({
-      from: 'devspace2015@codershell.org',
+      from: 'order-notification-devspace2015@codershell.org',
       to: 'devspace2015@codershell.org',
       subject: 'new order received',
       text: JSON.stringify(jsonBody)
