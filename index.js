@@ -24,6 +24,8 @@ app.get(SERVICE_CHECK_HTTP, function (req, res) {
   res.send({ message: 'OK' });
 });
 
+var orders = [];
+
 app.post('/notification/order', function (req, res) {
   var jsonBody = req.body;
   
@@ -34,9 +36,17 @@ app.post('/notification/order', function (req, res) {
       text: JSON.stringify(jsonBody)
   });
   
-  res.status(201).end();
+  orders.push(jsonBody);
+  res.status(201).location('/notification/order/' + (orders.length-1)).end();
 });
 
+app.get('/notification/order/', function( req, res) {
+  res.send(orders);
+});
+
+app.get('/notification/order/:id', function(req, res) {
+  res.send(orders[req.params.id]);
+});
 
 
 // Start the server
